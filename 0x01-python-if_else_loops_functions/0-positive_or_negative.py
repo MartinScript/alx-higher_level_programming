@@ -7,6 +7,6 @@ if number > 0:
 elif number == 0:
     val = "is zero"
 else:
-    val = "is negative"
+    val = "is negative
 
 print("{:d} {:s}".format(number, val))
