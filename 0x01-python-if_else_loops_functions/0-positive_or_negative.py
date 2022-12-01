@@ -9,4 +9,5 @@ elif number == 0:
 else:
     val = "is negative"
 
+
 print("{:d} {:s}".format(number, val))
