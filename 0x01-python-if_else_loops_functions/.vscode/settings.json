@@ -1,4 +1,6 @@
 {
 	"editor.formatOnSave": true,
-	"editor.formatOnPaste": true
+	"editor.formatOnPaste": true,
+	"python.linting.pycodestyleEnabled": true,
+	"python.linting.enabled": true
 }
