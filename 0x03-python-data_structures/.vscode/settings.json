@@ -1,0 +1,8 @@
+{
+	"editor.defaultFormatter": "ms-python.black-formatter",
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"files.autoSave": "afterDelay",
+	"editor.renderWhitespace": "all"
+}
