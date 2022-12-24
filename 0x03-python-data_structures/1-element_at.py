@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-class Person:
-    pass
-
-p = Person()
-print(p)
+def element_at(my_list, idx):
+    if idx < 0 or idx >= len(my_list):
+        return None
+    i = my_list[idx]
+    return i
