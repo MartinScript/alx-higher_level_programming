@@ -1,14 +1,9 @@
 #!/usr/bin/python3
-"""
-A Rectangle
-"""
+"""create class"""
 
 
 class Rectangle:
-    """
-    functions and data
-    """
     def __init__(self):
-        """instantiation"""
+        """add pass for print the class max{}"""
         pass
 
