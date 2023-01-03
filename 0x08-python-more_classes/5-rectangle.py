@@ -71,6 +71,3 @@ class Rectangle:
     def __del__(self):
         """Destructors are called when object is deleted"""
         print("Bye rectangle...")
-
-
-
