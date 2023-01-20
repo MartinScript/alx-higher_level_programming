@@ -1,6 +1,10 @@
 #!/usr/bin/python3 
+ """initialize""" 
+  
+  
  def read_file(filename=""): 
-     with open(filename, encoding="utf-8") as fd: 
-         for line in fd: 
-             print(line, end="")
-
+     """create function that read a text file""" 
+     with open(filename, encoding="UTF8") as f: 
+         line = f.read() 
+     print(line, end="") 
+     f.close()
