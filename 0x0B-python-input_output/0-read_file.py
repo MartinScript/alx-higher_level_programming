@@ -1,7 +1,7 @@
 #!/usr/bin/python3 
- """initialize""" 
-  
-  
+ """initialize"""
+ 
+ 
  def read_file(filename=""): 
      """create function that read atext file""" 
      with open(filename, encoding="UTF8") as f: 
