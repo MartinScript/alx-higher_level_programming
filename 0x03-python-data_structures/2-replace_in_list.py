@@ -6,12 +6,3 @@ def replace_in_list(my_list, idx, element):
         if idx == i:
             my_list[i] = element
     return my_list
-
-
-list = [0]
-idx = 0
-element = 4
-new_list = replace_in_list(list, idx, element)
-
-print(new_list)
-print(list)
