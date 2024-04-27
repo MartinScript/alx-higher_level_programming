@@ -1,23 +1,28 @@
 #!/usr/bin/python3
-'''Lists all State objects from the database hbtn_0e_6_usa'''
+'''Lists all State objects from the database hbtn_0e_6_usa where the state name contains the letter 'a'.'''
 from sys import argv
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 if __name__ == '__main__':
-    connection = 'mysql+mysqldb://{}:{}@localhost/{}'
-    engine = create_engine(connection.format(*argv[1:]),
-                           pool_pre_ping=True)
+    try:
+        # Database connection string
+        connection = f'mysql+mysqldb://{argv[1]}:{argv[2]}@localhost/{argv[3]}'
 
-    Base.metadata.create_all(engine)
-    session_m = sessionmaker(bind=engine)
-    session = session_m()
+        # Create engine and bind session
+        engine = create_engine(connection, pool_pre_ping=True)
+        Session = sessionmaker(bind=engine)
 
-    states = session.query(State).filter(State.name.contains('a'))\
-                    .order_by(State.id).all()
-    for state in states:
-        print('{}: {}'.format(state.id, state.name))
+        # Create session
+        with Session() as session:
+            # Query for all State objects where the state name contains 'a'
+            states = session.query(State).filter(
+                State.name.contains('a')).order_by(State.id).all()
 
-    session.close()
+            # Print state information
+            for state in states:
+                print(f'{state.id}: {state.name}')
+
+    except Exception as e:
+        print(f"Error: {e}")
