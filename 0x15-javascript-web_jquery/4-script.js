@@ -1,4 +1,3 @@
-#!/usr/bin/node
 $(function () {
     $("#toggle_header").on("click", function () {
         if ($("header").hasClass("red"))
