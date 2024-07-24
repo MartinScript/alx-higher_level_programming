@@ -3,7 +3,7 @@
 
 
 class Square:
-    '''inalitation with size'''
+    '''Inialitation size'''
     def __init__(self, size=0):
         self.size = size
 
@@ -24,3 +24,12 @@ class Square:
     def area(self):
         '''return square area'''
         return self.__size ** 2
+
+    def my_print(self):
+        '''loop for prints '#'character'''
+        if self.__size == 0:
+            print("")
+        for i in range(self.__size):
+            for j in range(self.__size):
+                print("#", end="")
+            print("")

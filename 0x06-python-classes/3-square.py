@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+'''Square class'''
 
 
 class Square:
+    '''private instance attribute size'''
     def __init__(self, size=0):
+        '''inalitation with size'''
         if type(size) is not int:
             raise TypeError("size must be an integer")
         if size < 0:
@@ -10,4 +13,5 @@ class Square:
         self.__size = size
 
     def area(self):
-        return self.__size * self.__size
+        '''return square area'''
+        return self.__size ** 2
