@@ -5,23 +5,18 @@ from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 if __name__ == '__main__':
-    try:
-        # Database connection string
-        connection = f'mysql+mysqldb://{argv[1]}:{argv[2]}@localhost/{argv[3]}'
+    connection = 'mysql+mysqldb://{}:{}@localhost/{}'
+    engine = create_engine(connection.format(*argv[1:]),
+                           pool_pre_ping=True)
 
-        # Create engine and bind session
-        engine = create_engine(connection, pool_pre_ping=True)
-        Session = sessionmaker(bind=engine)
+    Base.metadata.create_all(engine)
+    session_m = sessionmaker(bind=engine)
+    session = session_m()
 
-        # Create session
-        with Session() as session:
-            # Query for all State objects
-            states = session.query(State).order_by(State.id).all()
+    states = session.query(State).order_by(State.id).all()
+    for state in states:
+        print('{}: {}'.format(state.id, state.name))
 
-            # Print state information
-            for state in states:
-                print(f'{state.id}: {state.name}')
-
-    except Exception as e:
-        print(f"Error: {e}")
+    session.close()

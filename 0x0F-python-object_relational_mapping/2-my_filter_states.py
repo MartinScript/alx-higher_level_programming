@@ -4,38 +4,27 @@ from sys import argv
 import MySQLdb
 
 
-def list_states_by_name(user, passwd, db, argument):
-    """List all states matching the provided name"""
-    try:
-        db_settings = {
+if __name__ == '__main__':
+    user, passwd, db, argument = argv[1:]
+
+    db_setting = {
             'host': 'localhost',
             'port': 3306,
             'user': user,
             'passwd': passwd,
             'db': db,
             'charset': "utf8"
-        }
+            }
 
-        # Connect to the database
-        with MySQLdb.connect(**db_settings) as conn:
-            with conn.cursor() as cur:
-                # Execute the query
-                query = "SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id"
-                cur.execute(query, (argument,))
-                query_rows = cur.fetchall()
+    conn = MySQLdb.connect(**db_setting)
+    cur = conn.cursor()
 
-                # Print the results
-                for row in query_rows:
-                    print(row)
+    query = "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY id"\
+            .format(argument)
 
-    except MySQLdb.Error as e:
-        print(f"Error: {e}")
-
-
-if __name__ == '__main__':
-    if len(argv) != 5:
-        print("Usage: ./script.py <username> <password> <database> <name>")
-        exit(1)
-
-    username, password, database, name = argv[1:]
-    list_states_by_name(username, password, database, name)
+    cur.execute(query)
+    query_rows = cur.fetchall()
+    for row in query_rows:
+        print(row)
+    cur.close()
+    conn.close()

@@ -1,1 +1,1 @@
-<h1>0x12. JavaScript - Warm up</h1>
+# 0-javascript_is_amazing.js

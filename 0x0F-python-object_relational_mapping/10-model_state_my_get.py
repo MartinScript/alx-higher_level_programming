@@ -1,32 +1,21 @@
 #!/usr/bin/python3
 """
-'10-model_state_my_get' module, uses SQLAlchemy to query a state object from a database
+'10-model_state_my_get' module, uses sqlalchemy to list state
+objects from a database
 """
 if __name__ == '__main__':
-    try:
         from model_state import Base, State
         from sqlalchemy import create_engine
         from sqlalchemy.orm import sessionmaker
         import sys
-
-        # Database connection string
-        connection = f"mysql+mysqldb://{sys.argv[1]}:{sys.argv[2]}@localhost/{sys.argv[3]}"
-
-        # Create engine and session
-        engine = create_engine(connection)
+        engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
+                               .format(sys.argv[1], sys.argv[2], sys.argv[3]))
+        Base.metadata.create_all(bind=engine)
         Session = sessionmaker(bind=engine)
-
-        # Create session
-        with Session() as session:
-            # Query for the state object based on the provided state name
-            state = session.query(State).filter(
-                State.name == sys.argv[4]).first()
-
-            # Print state information
-            if state:
-                print(state.id)
-            else:
-                print("Not found")
-
-    except Exception as e:
-        print(f"Error: {e}")
+        session = Session()
+        states = session.query(State).filter(State.name == sys.argv[4]).first()
+        if states:
+            print("{}".format(states.id))
+        else:
+            print("Not found")
+        session.close()
